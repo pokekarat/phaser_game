@@ -1,0 +1,61 @@
+  1. Start Web server ด้วยคำสั่ง ผ่าน cmd
+     python -m SimpleHTTPServer 8080 ที่ folder ที่เราเก็บ code ไว้
+หรือ  python -m http.server
+
+  2. การเรียกใช้งาน http://127.0.0.1:8080/week2.html
+To solve address already in use
+1. lsof -i tcp:3000
+2. kill -9 pid
+
+Chrome
+Setting > Preferences > Restore defaults and reload
+ตั้งค่า > ขั้นสูง > รีเซตและล้างข้อมูล > คืนค่า...
+
+
+
+
+
+
+
+
+
+
+
+
+
+Week3
+Excercise 1. ออกแบบฉากเกมส์
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  3. สร้างไฟล์ชื่อ week2.html
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <script src="phaser.min.js"></script>
+            <script src="game.js"></script>
+        </head>
+    </html>
+  4. download "phaser.min.js" ชื่อไฟล์ min.js มาเก็บไว้ใน folder
+      https://phaser.io/download/stable
+  5. สร้างไฟล์ชื่อ "game.js"
+
+  สรุปใน webserver มี 3 ไฟล์ week2.html, game.js, phaser.min.js
+  เมื่อรันใน browser จะเป็นหน้าปล่าว
+
+  //Download asset
+  //https://tinyurl.com/ydddkmkm
+  //game.js
