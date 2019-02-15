@@ -10,9 +10,10 @@ var WorldScene = new Phaser.Class({
 
     create: function ()
     {
+        this.score = 0;
+
         //Create background
         this.add.image(400, 300, 'sky');
-        this.score = 0;
 
         //Create ground
         this.platforms = this.physics.add.staticGroup();
@@ -23,6 +24,7 @@ var WorldScene = new Phaser.Class({
         
         //Create player
         this.player = this.physics.add.sprite(300, 450, 'dude');
+
         //this.player.setBounce(0.2);
         this.player.setCollideWorldBounds(true);
         //this.player.body.setGravityY(100);
@@ -58,7 +60,6 @@ var WorldScene = new Phaser.Class({
         });
 
         //this.newStar = new FlyingStar(this, 150, 100, 100, 100, 0.005);
-
         this.stars.children.iterate(function (child) {
             child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
         });
@@ -76,22 +77,61 @@ var WorldScene = new Phaser.Class({
         this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
 
         //Add movable ground
-        var block = this.physics.add.image(400,300, 'ground')
+        this.block = this.physics.add.image(400,300, 'ground')
                     .setScale(0.5)
                     .setImmovable(true)
                     .setVelocity(50,-50);
-        block.body.setAllowGravity(false);
+        this.block.body.setAllowGravity(false);
 
         this.tweens.timeline({
-            targets: block.body.velocity,
+            targets: this.block.body.velocity,
             loop: -1,
             tweens: [
-              { x:    0, y:    -100,  duration: 3000, ease: 'Stepped' },
-              { x:    0, y:     100,  duration: 3000, ease: 'Stepped' }
+              { x: 0, y: -100,  duration: 2000, ease: 'Stepped' },
+              { x: 0, y: 100,  duration: 2000, ease: 'Stepped' }
             ]
-          });
+        });
         
-        this.physics.add.collider(block, this.player);
+        this.physics.add.collider(this.block, this.player);
+
+        //Default
+        // x: 600,
+        // y: 100,
+        // angle: { min: 140, max: 180 },
+        // speed: 400,
+        // gravityY: 200,
+        // lifespan: { min: 1000, max: 2000 },
+        // blendMode: 'ADD'
+
+        //particle effect
+        // var particles = this.add.particles('spark');
+
+        // this.emitter = particles.createEmitter({
+        //     x: 0,
+        //     y: 50,
+        //     angle: { min: 88, max: 92 },
+        //     speed: 100,
+        //     gravityX: 200,
+        //     lifespan: { min: 200, max: 400 },
+        //     blendMode: 'ADD',
+        //     scale: 0.5
+        // });
+
+        this.a = 0;
+        //ให้ นศ สร้างน้ำพุสองตำแหน่งที่พื้น
+        var particles = this.add.particles('spark');
+        this.emitter = particles.createEmitter({
+            x: 0,
+            y: 50,
+            angle: { min: 175, max: 185 },
+            speed: 100,
+            gravityY: 300,
+            lifespan: { min: 200, max: 400 },
+            blendMode: 'ADD',
+            scale: 0.5
+        });
+        this.emitter.stop();
+        
     },
 
     hitBomb: function(player, bomb){
@@ -132,12 +172,29 @@ var WorldScene = new Phaser.Class({
         }
     },
 
+    
     update: function (time, delta)
     {
+        
         if (this.gameOver)
         {
             return;
         }
+
+        //this.emitter.setAngle(this.a);
+        //this.a += 1;
+
+        this.emitter.startFollow(this.player);
+
+
+        
+        
+        
+        //this.emitter.startFollow(this.player);
+
+        //console.log("block y "+ this.block.body.y);
+
+        
 
         if (this.cursors.left.isDown)
         {
@@ -156,10 +213,26 @@ var WorldScene = new Phaser.Class({
             this.player.anims.play('turn');
         }
 
+        
         if (this.cursors.up.isDown && this.player.body.touching.down)
         {
-            this.player.setVelocityY(-320);
+            this.player.setVelocityY(-300);
             //console.log("Player x", this.player.body.y);
+            //this.emitter.start();
+            console.log("start jump");
         }
+
+        //ถ้าไม่ได้แตะพื้นให้ emitter start
+       if(!this.player.body.touching.down){
+           console.log("air");
+           this.emitter.start();
+       }
+
+       //ถ้าแตะพื้นอยู่ให้ emitter stop
+       if(this.player.body.touching.down){
+            console.log("ground");
+            this.emitter.stop();
+       }
+
     }
 });

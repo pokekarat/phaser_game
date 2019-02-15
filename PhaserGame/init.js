@@ -5,8 +5,8 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y:300 }, 
-            debug: true
+            gravity: { y:500 }
+            //debug: true
             
         }
     },
@@ -14,7 +14,6 @@ var config = {
         BootScene,
         WorldScene,
         WorldScene2
-        
     ]
 };
 

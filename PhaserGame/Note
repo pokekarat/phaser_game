@@ -1,5 +1,6 @@
   1. Start Web server ด้วยคำสั่ง ผ่าน cmd
-     python -m SimpleHTTPServer 8080 ที่ folder ที่เราเก็บ code ไว้
+     python2 -m SimpleHTTPServer 8080 
+     ที่ folder ที่เราเก็บ code ไว้
 หรือ  python -m http.server
 
   2. การเรียกใช้งาน http://127.0.0.1:8080/week2.html
@@ -12,6 +13,10 @@ Setting > Preferences > Restore defaults and reload
 ตั้งค่า > ขั้นสูง > รีเซตและล้างข้อมูล > คืนค่า...
 
 
+Manual
+https://rexrainbow.github.io/phaser3-rex-notes/docs/site/particles/
+
+https://labs.phaser.io/index.html
 
 
 

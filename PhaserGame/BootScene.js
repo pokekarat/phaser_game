@@ -1,6 +1,4 @@
 
-
-
 var BootScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
@@ -18,8 +16,10 @@ var BootScene = new Phaser.Class({
         this.load.image('ground', 'assets/platform.png');
         this.load.image('star', 'assets/star.png');
         this.load.image('bomb', 'assets/bomb.png');
-        this.load.spritesheet('dude','assets/dude.png',{ frameWidth: 32, frameHeight: 48 }
-        );
+        this.load.image('slope', 'assets/slope.png');
+        this.load.image('spark', 'assets/particles/blue.png');
+        this.load.spritesheet('dude','assets/dude.png',
+            { frameWidth: 32, frameHeight: 48 });
     },
 
     create: function ()
